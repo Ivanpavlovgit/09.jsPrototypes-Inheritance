@@ -1,18 +1,24 @@
-const myCollection = {};
+const myOb = {};
 
-Object.defineProperty(myCollection, 'size', {
-    enumerable: false,
-    get: function () {
-        return Object.keys(this).length;
-    }
+
+Object.defineProperty(myOb, '_name', {value: 'George', enumerable: false, writable: true})
+
+
+Object.defineProperty(myOb, 'name', {
+
+    get() {
+        return this._name;
+    },
+    set(value) {
+        this._name = value;
+    }, enumerable: true
 });
-
-myCollection['Jan'] = '+359-321-553-000';
-myCollection['Clod'] = '+359-321-553-001';
-myCollection['Van'] = '+359-321-553-222';
-myCollection['Damme'] = '+359-321-553-333';
-console.log(myCollection.size);
-for (let key in myCollection) {
-    console.log(key,myCollection[key]);
+console.log('Before ->', myOb.name);
+myOb.name = 'Peter';
+console.log('After ->', myOb.name);
+console.log(myOb);
+for (const key in myOb) {
+    let counter = 1;
+    console.log(counter, key, myOb[key]);
 }
-console.log(Object.getOwnPropertyNames(myCollection));
+console.log(Object.getOwnPropertyNames(myOb));
