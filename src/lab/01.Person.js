@@ -1,21 +1,18 @@
-class Person {
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    get fullName() {
-        return `${this.firstName} ${this.lastName}`;
-    }
-
-    set fullName(value) {
-        this.firstName=value.split(' ')[0];
-        this.lastName=value.split(' ')[1];
-    }
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    Object.defineProperty(this, 'fullName', {
+        enumerable: true,
+        get: function () {
+            return `${this.firstName} ${this.lastName}`
+        },
+        set: function (value) {
+            [this.firstName, this.lastName] = value.split(' ');
+        }
+    });
 }
-const myPerson=new Person('pesho','meshev');
-console.log(myPerson);
-myPerson.fullName='MESHO PESHEV';
-console.log(myPerson);
-myPerson.firstName='hesho';
-console.log(myPerson);
+const me=new Person('terminator','merminator');
+console.log(me);
+console.log(me.firstName);
+console.log(me.lastName);
+console.log(me.fullName);
