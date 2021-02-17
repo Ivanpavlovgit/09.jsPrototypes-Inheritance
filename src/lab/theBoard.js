@@ -8,7 +8,7 @@ Object.defineProperty(myOb,'name',{
     configurable:false
 });
 console.log(myOb);
-//delete myOb.name;
+delete myOb.name;
 console.log(myOb);
 Object.defineProperty(myOb,'name',{
     value:'can change'
