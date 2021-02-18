@@ -1,27 +1,25 @@
-function Person(name){
-    this.name=name;
-}
-Person.prototype.sayHi=function (){
-    console.log(`${this.name} says hi!`);
-}
-function Employee(name,salary){
-    Person.call(this,name);
-    this.salary=salary;
-}
+class Person {
 
+    constructor(name) {
+        this.name = name;
+    }
 
-//~~~~~~~~~~~~~Inherit with Object.create(class.class/obj.prototype)
-//if inherited with just class.class/obj.prototype it copies the reference and after change the
-// child prototype will change the parent type which is VERY BAD~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Employee.prototype=Object.create(Person.prototype);
-
-
-
-Employee.prototype.collectSalary=function (){
-    console.log(`${this.name} collected ${this.salary}`);
+    sayHi() {
+        console.log(`${this.name} says hi!`);
+    }
 }
 
-const myEmployYee=new Employee('Slave','50lv');
-console.log(myEmployYee);
-myEmployYee.sayHi();
-myEmployYee.collectSalary();
+class Employee extends Person {
+    constructor(name,salary) {
+        super(name);
+        this.salary = salary;
+    }
+    collectSalary(){
+        console.log(`${this.name} collected ${this.salary} }`);
+        this.sayHi();
+    }
+}
+const foo=new Employee('Emp1', '50lv')
+console.log(foo);
+//foo.sayHi();
+foo.collectSalary();
